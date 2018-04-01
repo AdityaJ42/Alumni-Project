@@ -1,0 +1,13 @@
+<h2>{{ profile.name }}</h2>
+
+<img src="{{ profile.profile_pic.url }}" />
+
+<h3>Username: {{ user.username }}</h3>
+<h3>Email: {{ user.email }}</h3>
+<h3>Department: {{ profile.department }}</h3>
+
+<form action="/logout/">
+  <div class='dekhlo' style="position: absolute; right:20;top:20">
+    <button>Logout</button>
+  </div>
+</form>
