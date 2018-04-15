@@ -1,16 +1,13 @@
 {% extends 'sign_in/base.html' %}
 
-{% block book %}
-{% if request.user.is_superuser %}
-<h3><a href="{% url 'events:addEvent' %}">Add An Event</a></h3>
-
-{% elif request.user.is_authenticated %}
-<h3><a href="{% url 'sign_in:profile' %}">Profile</a></h3>
-{% endif %}
-
-<ul>
-  {% for event in events %}
-  <li><a href="{% url 'events:details' event.id %}">{{ event.event_name }}</a></li>
-  {% endfor %}
-</ul>
+{% block body %}
+<div class="content">
+  <div class="col">
+    <img src="/media/DJSCE.png">
+  </div>
+  <div class="col">
+    <h1 style="text-align: center;margin-top: 40px">Dwarkadas J Saghvi College Of Engineering</h1>
+    <h1 style="text-align: center;margin-top: 40px">Hub Of The Alumni</h1>
+  </div>
+</div>
 {% endblock %}

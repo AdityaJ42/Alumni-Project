@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{% block title %}Alumni Hub{% endblock %}</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico" type="text/css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'music/style.css' %}" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+		<!-- Header -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="{% url 'home' %}">Alumni Hub</a>
+		</div>
+
+		<!-- Items -->
+		<div class="collapse navbar-collapse" id="topNavBar">
+			<ul class="nav navbar-nav">
+				<li class="">
+					<a href="{% url 'events:list' %}">
+						<span class="glyphicon glyphicon-education" aria-hidden="true"></span>&nbsp; Events
+					</a>
+				</li>
+				<li class="">
+					<a href="{% url 'sign_in:search' %}">
+						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp; Search
+					</a>
+				</li>
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				{% if request.user.is_authenticated %}
+				{% if request.user.is_superuser %}
+				<li class="">
+					<a href="{% url 'events:addEvent' %}">
+						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp; Add Event
+					</a>
+				</li>
+				{% endif %}
+				<li class="">
+					<a href="{% url 'sign_in:profile' %}">
+						<span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp; Profile
+					</a>
+				</li>
+				<li class="">
+					<a href="/logout/">
+						<span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout
+					</a>
+				</li>
+				{% else %}
+				<li class="">
+					{% if not request.user.is_authenticated %}
+					<a href="/login/">
+						<span class="glyphicon glyphicon-music" aria-hidden="true"></span>&nbsp; Login
+					</a>
+					{% endif %}
+				</li>
+				{% endif %}
+			</ul>
+
+		</div>
+		</div>
+	</nav>
+
+	{% block body %}
+	{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+{% extends 'sign_in/base.html' %}
+
+{% block body %}
+
+<h1 style="margin-left: 20px;">Events</h1>
+<ul>
+{% for event in events %}
+  <a href="{% url 'events:details' event.id %}"><li style="margin-left: 20px;font-family: Sans-Serif;">{{ event.event_name }}</li></a>
+{% endfor %}
+</ul>
+{% endblock %}

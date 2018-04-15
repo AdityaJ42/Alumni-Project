@@ -28,7 +28,10 @@ def register(request):
 
             profile = profile_form.save(commit=False)
             profile.user = user
-            profile.profile_pic = request.FILES['profile_pic']
+            if request.FILES:
+                profile.profile_pic = request.FILES['profile_pic']
+            else:
+                profile.profile_pic = 'user.png'
             profile.save()
 
             login(request, authenticate(username=username, password=raw_password))

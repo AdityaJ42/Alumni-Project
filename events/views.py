@@ -6,6 +6,10 @@ from django.views.generic import UpdateView, DeleteView
 from django.urls import reverse_lazy
 
 
+def eventsList(request):
+    events = Events.objects.all()
+    return render(request, 'events/eventsList.html', {'events': events})
+
 def createEvent(request):
     if request.method == 'POST':
         event_form = eventForm(request.POST)
