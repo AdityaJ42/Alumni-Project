@@ -1,3 +1,16 @@
-<h1>Home</h1><br>
+{% extends 'sign_in/base.html' %}
 
+{% block book %}
+{% if request.user.is_superuser %}
+<h3><a href="{% url 'events:addEvent' %}">Add An Event</a></h3>
+
+{% elif request.user.is_authenticated %}
 <h3><a href="{% url 'sign_in:profile' %}">Profile</a></h3>
+{% endif %}
+
+<ul>
+  {% for event in events %}
+  <li><a href="{% url 'events:details' event.id %}">{{ event.event_name }}</a></li>
+  {% endfor %}
+</ul>
+{% endblock %}

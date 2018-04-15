@@ -4,11 +4,13 @@ from .forms import Register, ProfileForm
 from django.contrib.auth import login, authenticate
 from .filters import findUser
 from .models import Profile
+from events.models import Events
 from django.contrib.auth.models import User
 # Create your views here.
 
 def home(request):
-    return render(request, 'sign_in/home.html')
+    event_list = Events.objects.all().order_by('-id')[:10:1]
+    return render(request, 'sign_in/home.html',{'events': event_list})
 
 def register(request):
     registered = False

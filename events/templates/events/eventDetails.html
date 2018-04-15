@@ -1,0 +1,16 @@
+<h2>{{ event.event_name }}</h2>
+
+<h3>{{ event.day }}</h3>
+<h3>{{ event.location }}</h3>
+
+<h4>{{ event.description }}</h4>
+
+{% if request.user.is_superuser %}
+  <div style="position: absolute; right:20;top:20">
+    <a href="{% url 'events:update' event.id %}"><button>Update Details</button></a>
+  </div>
+
+  <div style="position: absolute; right:20;top:60">
+    <a href="{% url 'events:delete' event.id %}"><button>Delete Event</button></a>
+  </div>
+{% endif %}

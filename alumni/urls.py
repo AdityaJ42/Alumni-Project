@@ -26,7 +26,8 @@ urlpatterns = [
     url(r'^logout/', auth_views.logout, name='logout'),
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name='home'),
-    url(r'sign_in/', include('sign_in.urls', namespace='sign_in'))
+    url(r'sign_in/', include('sign_in.urls', namespace='sign_in')),
+    url(r'events/', include('events.urls', namespace='events'))
 ]
 
 if settings.DEBUG:
