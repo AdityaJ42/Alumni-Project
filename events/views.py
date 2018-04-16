@@ -22,8 +22,11 @@ def createEvent(request):
         return render(request, 'events/addEvent.html', {'event': event_form})
 
 def eventDetails(request, pk):
-    event = Events.objects.get(pk=pk)
-    return render(request, 'events/eventDetails.html', {'event': event})
+    if request.user.is_authenticated:
+        event = Events.objects.get(pk=pk)
+        return render(request, 'events/eventDetails.html', {'event': event})
+    else:
+        return redirect('/login/')
 
 class EventUpdateView(UpdateView):
     queryset = Events.objects.all()

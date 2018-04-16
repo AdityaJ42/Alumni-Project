@@ -45,12 +45,17 @@ def register(request):
         return render(request, 'sign_in/register.html', {'user_form': user_form, 'profile_form': profile_form})
 
 def search(request):
-    # user = User.objects.get(username=request.username)
-    profile = Profile.objects.all()
-    user_filter = findUser(request.GET, queryset=profile)
-    return render(request, 'sign_in/search.html', {'filter': user_filter})
+    if request.user.is_authenticated:
+        profile = Profile.objects.all()
+        user_filter = findUser(request.GET, queryset=profile)
+        return render(request, 'sign_in/search.html', {'filter': user_filter})
+    else:
+        return redirect('/login/')
 
 def profile(request):
-    user = request.user
-    profile = Profile.objects.get(user=request.user)
-    return render(request, 'sign_in/profile.html', {'user': user, 'profile': profile})
+    if request.user.is_authenticated:
+        user = request.user
+        profile = Profile.objects.get(user=request.user)
+        return render(request, 'sign_in/profile.html', {'user': user, 'profile': profile})
+    else:
+        return redirect('/login/')
